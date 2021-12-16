@@ -21,7 +21,6 @@ const getAllProducts = async (req, res) => {
 
 const getProductbyId = async (req, res) => {
   try {
-		console.log(req.params)
 		const id = req.params.id
     const products = await Product.findById(id)
     return res.status(200).json(products)
@@ -33,7 +32,6 @@ const getProductbyId = async (req, res) => {
 
 const deleteProductbyId = async (req, res) => {
   try {
-		console.log(req.params)
 		const id = req.params.id
     const deletedProduct = await Product.findByIdAndDelete(id)
     return res.status(200).json("Product Deleted")
@@ -44,7 +42,6 @@ const deleteProductbyId = async (req, res) => {
 
 const updateProductbyId = async (req, res) => {
   try {
-		console.log(req.params)
 		const id = req.params.id
     const updatedProduct = await Product.findByIdAndUpdate(id, req.body)
     return res.status(200).json("Product updated")
