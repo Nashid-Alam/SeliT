@@ -8,6 +8,9 @@ const PORT = process.env.PORT || 3001;
 
 const app = express();
 
+const bodyParser = require('body-parser');
+app.use(bodyParser.json())
+
 // app.use() middleware here ^ ///////////////////
 
 app.use('/api', routes);
