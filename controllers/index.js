@@ -1,4 +1,5 @@
 const Product = require("../models/product")
+const Review = require("../models/review")
 
 const createProduct = async (req, res) => {
   try {
@@ -19,9 +20,9 @@ const getAllProducts = async (req, res) => {
   }
 }
 
-const getProductbyId = async (req, res) => {
+const getProductById = async (req, res) => {
   try {
-		const id = req.params.id
+    const id = req.params.id
     const products = await Product.findById(id)
     return res.status(200).json(products)
   } catch (error) {
@@ -29,10 +30,9 @@ const getProductbyId = async (req, res) => {
   }
 }
 
-
-const deleteProductbyId = async (req, res) => {
+const deleteProductById = async (req, res) => {
   try {
-		const id = req.params.id
+    const id = req.params.id
     const deletedProduct = await Product.findByIdAndDelete(id)
     return res.status(200).json("Product Deleted")
   } catch (error) {
@@ -40,11 +40,60 @@ const deleteProductbyId = async (req, res) => {
   }
 }
 
-const updateProductbyId = async (req, res) => {
+const updateProductById = async (req, res) => {
   try {
-		const id = req.params.id
+    const id = req.params.id
     const updatedProduct = await Product.findByIdAndUpdate(id, req.body)
-    return res.status(200).json("Product updated")
+    return res.status(200).json("Product Updated")
+  } catch (error) {
+    return res.status(500).send(error.message)
+  }
+}
+
+const createReview = async (req, res) => {
+  try {
+    const review = await new Review(req.body)
+    await review.save()
+    return res.status(201).json(review)
+  } catch (error) {
+    return res.status(500).json({ error: error.message })
+  }
+}
+
+const getAllReviews = async (req, res) => {
+  try {
+    const reviews = await Review.find()
+    return res.status(200).json(reviews)
+  } catch (error) {
+    return res.status(500).send(error.message)
+  }
+}
+
+const getReviewById = async (req, res) => {
+  try {
+    const id = req.params.id
+    const review = await Review.findById(id)
+    return res.status(200).json(review)
+  } catch (error) {
+    return res.status(500).send(error.message)
+  }
+}
+
+const deleteReviewById = async (req, res) => {
+  try {
+    const id = req.params.id
+    const deletedReview = await Review.findByIdAndDelete(id)
+    return res.status(200).json("Review Deleted")
+  } catch (error) {
+    return res.status(500).send(error.message)
+  }
+}
+
+const updateReviewById = async (req, res) => {
+  try {
+    const id = req.params.id
+    const updatedReview = await Review.findByIdAndUpdate(id, req.body)
+    return res.status(200).json("Review Updated")
   } catch (error) {
     return res.status(500).send(error.message)
   }
@@ -53,7 +102,12 @@ const updateProductbyId = async (req, res) => {
 module.exports = {
   createProduct,
   getAllProducts,
-	getProductbyId,
-	deleteProductbyId,
-	updateProductbyId
+  getProductById,
+  deleteProductById,
+  updateProductById,
+  createReview,
+  getAllReviews,
+  getReviewById,
+  deleteReviewById,
+  updateReviewById,
 }
