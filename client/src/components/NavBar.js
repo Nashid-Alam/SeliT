@@ -1,9 +1,15 @@
 import React from 'react'
+import { NavLink} from "react-router-dom"
 
-function NavBar() {
+function NavBar(props) {
   return (
     <div>
-      
+      <nav>
+        <NavLink className = 'nav' to = "/">Home</NavLink>
+        <NavLink className = 'nav' to = "/about">About</NavLink>
+        <NavLink className = 'nav' to = "/productdetails/:productId">Product Detail</NavLink>
+        <NavLink className = 'nav' to = "/productpost">Product Post</NavLink>
+      </nav>
     </div>
   )
 }

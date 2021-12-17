@@ -4,12 +4,14 @@ import Home from "./pages/Home"
 import About from "./pages/About"
 import ProductDetails from "./pages/ProductDetails"
 import ProductPost from "./pages/ProductPost"
+import NavBar from "./components/NavBar"
 import "./App.css"
+
 
 function App() {
   return (
     <div className="App">
-      Hello React
+      <NavBar/>
       <main>
         <Switch>
           <Route exact path="/" component={Home} />
