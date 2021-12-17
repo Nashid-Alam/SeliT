@@ -1,11 +1,13 @@
 import React from 'react'
 
 function ProductCard(props) {
+
+
   return (
-    <div>
+    <div className="product" onClick={props.onClick}>
       <img src={props.image} alt ="product"/>
-      <h3>{props.name}</h3>
-      <h1>{props.rating}</h1>
+      <h3>{props.product.name}</h3>
+      <h1>{props.product.price}</h1>
       
     </div>
   )
