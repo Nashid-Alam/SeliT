@@ -19,11 +19,14 @@ function ProductDetails(props) {
     getProduct()
   }, [id])
 
-  const deletePost = async (e) => {
+  const deleteProduct = async (e) => {
     e.preventDefault()
-    const response = await axios.delete(`http://localhost:3001/api/product/${id}`)
-    props.history.push('/')
+    const response = await axios.delete(
+      `http://localhost:3001/api/product/${id}`
+    )
+    props.history.push("/")
   }
+
   return (
     <div>
       <div>
@@ -31,7 +34,7 @@ function ProductDetails(props) {
         <img src={product.image} alt="product" />
         <p>{product.description}</p>
       </div>
-      <button onClick={deletePost}>Delete this product</button>
+      <button onClick={deleteProduct}>Delete this product</button>
       <div>
         <ReviewCard productId={product._id} />
       </div>

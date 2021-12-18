@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import axios from "axios"
 
-function ProductPost() {
+function ProductPost(props) {
   const [productName, setProductName] = useState("")
   const [productPrice, setProductPrice] = useState("")
   const [productRating, setProductRating] = useState("")
@@ -42,28 +42,23 @@ function ProductPost() {
     }
   }
 
-  const handlePost = (e) => {
+  const handlePost = async (e) => {
     e.preventDefault()
-    axios
-      .post("http://localhost:3001/api/products", {
-        name: productName,
-        price: parseInt(productPrice),
-        category: productCategory,
-        description: productDescription,
-        average_rating: parseInt(productRating),
-        seller_name: sellerName,
-        seller_email: sellerEmail,
-      })
-      .then(
-        (response) => {
-          setProductPost(response)
-          console.log("success")
-        },
-        (error) => {
-          console.log(error)
-        }
-      )
+
+    const response = await axios.post("http://localhost:3001/api/products", {
+      name: productName,
+      price: parseInt(productPrice),
+      category: productCategory,
+      description: productDescription,
+      average_rating: parseInt(productRating),
+      seller_name: sellerName,
+      seller_email: sellerEmail,
+    })
+    console.log(response)
+    console.log("successfully added product")
+    props.history.push("/")
   }
+
   return (
     <div>
       <form>
