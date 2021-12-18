@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react"
 
 
 function ReviewCard(props) {
-  const id = props.productId
+  const id = props.reviewId
 
   const [reviews, setReviews] = useState({})
 
