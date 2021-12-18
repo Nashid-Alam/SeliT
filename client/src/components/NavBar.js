@@ -7,7 +7,6 @@ function NavBar(props) {
       <nav>
         <NavLink className = 'nav' to = "/">Home</NavLink>
         <NavLink className = 'nav' to = "/about">About</NavLink>
-        <NavLink className = 'nav' to = "/productdetails/:productId">Product Detail</NavLink>
         <NavLink className = 'nav' to = "/productpost">Product Post</NavLink>
       </nav>
     </div>
