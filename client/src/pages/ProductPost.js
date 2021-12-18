@@ -1,61 +1,115 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from "react"
+import axios from "axios"
 
 function ProductPost() {
-  const [productName, setProductName]=useState("")
-  const [productPrice, setProductPrice]=useState("")
-  const [productRating, setProductRating]=useState("")
-  const [productDescription, setProductDescription]=useState("")
-  const [productCategory, setProductCategory]=useState("")
-  const [sellerName, setSellerName]=useState("")
-  const [sellerEmail,setsellerEmail]=useState("")
+  const [productName, setProductName] = useState("")
+  const [productPrice, setProductPrice] = useState("")
+  const [productRating, setProductRating] = useState("")
+  const [productDescription, setProductDescription] = useState("")
+  const [productCategory, setProductCategory] = useState("")
+  const [sellerName, setSellerName] = useState("")
+  const [sellerEmail, setsellerEmail] = useState("")
+  const [productPost, setProductPost] = useState("")
+
+  const handleChange = (e) => {
+    if (e.target.name === "productName") {
+      setProductName(e.target.value)
+      console.log(e.target.value)
+    }
+    if (e.target.name === "productPrice") {
+      setProductPrice(e.target.value)
+      console.log(e.target.value)
+    }
+    if (e.target.name === "productRating") {
+      setProductRating(e.target.value)
+      console.log(e.target.value)
+    }
+    if (e.target.name === "productDescription") {
+      setProductDescription(e.target.value)
+      console.log(e.target.value)
+    }
+    if (e.target.name === "productCategory") {
+      setProductCategory(e.target.value)
+      console.log(e.target.value)
+    }
+    if (e.target.name === "sellerName") {
+      setSellerName(e.target.value)
+      console.log(e.target.value)
+    }
+    if (e.target.name === "sellerEmail") {
+      setsellerEmail(e.target.value)
+      console.log(e.target.value)
+    }
+  }
+
+  const handlePost = (e) => {
+    e.preventDefault()
+    axios
+      .post("http://localhost:3001/api/products", {
+        name: productName,
+        price: parseInt(productPrice),
+        category: productCategory,
+        description: productDescription,
+        average_rating: parseInt(productRating),
+        seller_name: sellerName,
+        seller_email: sellerEmail,
+      })
+      .then(
+        (response) => {
+          setProductPost(response)
+          console.log("success")
+        },
+        (error) => {
+          console.log(error)
+        }
+      )
+  }
   return (
     <div>
       <form>
-        <input 
+        <input
           name="productName"
-          type= "text"
+          type="text"
           placeholder="Enter a number"
-          // onChange={HandleChange}
-          />
-          <input 
+          onChange={handleChange}
+        />
+        <input
           name="productPrice"
-          type= "text"
+          type="text"
           placeholder="Enter a number"
-          // onChange={HandleChange}
-          />
-          <input 
+          onChange={handleChange}
+        />
+        <input
           name="productRating"
-          type= "text"
+          type="text"
           placeholder="Enter a number"
-          // onChange={HandleChange}
-          />
-          <input 
+          onChange={handleChange}
+        />
+        <input
           name="productDescription"
-          type= "text"
+          type="text"
           placeholder="Enter a number"
-          // onChange={HandleChange}
-          />
-          <input 
+          onChange={handleChange}
+        />
+        <input
           name="category"
-          type= "text"
+          type="text"
           placeholder="Enter a number"
-          // onChange={HandleChange}
-          />
-          <input 
+          onChange={handleChange}
+        />
+        <input
           name="sellerName"
-          type= "text"
+          type="text"
           placeholder="Enter a number"
-          // onChange={HandleChange}
-          />
-          <input 
+          onChange={handleChange}
+        />
+        <input
           name="sellerEmail"
-          type= "text"
+          type="text"
           placeholder="Enter a number"
-          // onChange={HandleChange}
-          />
-
-          
-          
+          onChange={handleChange}
+        />
+        <button onClick={handlePost}>Submit</button>
       </form>
     </div>
   )
