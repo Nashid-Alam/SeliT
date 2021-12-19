@@ -1,6 +1,7 @@
 import axios from "axios"
 import React, { useEffect, useState } from "react"
 import ReviewCard from "../components/ReviewCard"
+import EditProduct from "../components/EditProductCard"
 
 function ProductDetails(props) {
   console.log(props)
@@ -27,34 +28,6 @@ function ProductDetails(props) {
     )
     props.history.push("/")
   }
-
-  const editProduct = async (e) => {
-    e.preventDefault()
-    const name = e.target.name.value
-    const image = e.target.image.value
-    const price = e.target.price.value
-    const description = e.target.description.value
-    const body = {}
-
-    if (name !== "") {
-      body.name = name
-    }
-    if (image !== "") {
-      body.image = image
-    }
-    if (price !== "") {
-      body.price = price
-    }
-    if (description !== "") {
-      body.description = description
-    }
-    const response = await axios.put(
-      `http://localhost:3001/api/product/${id}`,
-      body
-    )
-    getProduct()
-  }
-
 
 
   const openUpdateForm = (e) => {
@@ -105,22 +78,8 @@ function ProductDetails(props) {
         <button onClick={openUpdateForm}>Update this product</button>
       </div>
 
-      <form onSubmit={editProduct}>
-        <label>Product Title: </label>
-        <input type="text" name="name" placeholder={product.name} />
-        <label>Product image: </label>
-        <input type="text" name="image" placeholder="enter image url" />
-        <label>Price: </label>
-        <input type="text" name="price" placeholder={"$" + product.price} />
-        <label>Description: </label>
-        <input
-          type="text"
-          name="description"
-          placeholder={product.description}
-        />
-        <button type="submit">Save</button>
-      </form>
-      
+      <EditProduct product={product} getProduct={getProduct} id={id}/>
+
       <div>
         <form onSubmit={addReview}>
           <label>Reviewer Name</label>
