@@ -9,8 +9,8 @@ const Product = new Schema(
     category: { type: String, required: false },
     description: { type: String, required: false },
     average_rating: { type: Number, required: false },
-    seller_name: { type: String, required: true },
-    seller_email: { type: String, required: true },
+    seller_name: { type: String, required: false },
+    seller_email: { type: String, required: false},
   },
   { timestamps: true }
 )
