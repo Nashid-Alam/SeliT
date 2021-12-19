@@ -7,18 +7,18 @@ function ProductDetails(props) {
   const id = props.match.params.productId
 
   const [product, setProduct] = useState({})
-  
+  const [reviews, setReviews] = useState([])
+
   const getProduct = async () => {
-    const response = await axios.get(
-      `http://localhost:3001/api/product/${id}`
-    )
-    console.log(response.data._id)
+    const response = await axios.get(`http://localhost:3001/api/product/${id}`)
     setProduct(response.data)
   }
-  useEffect(() => {
-    console.log("use effect ran")
-    getProduct()
-  }, [id])
+
+  const getReviews = async () => {
+    const response = await axios.get('http://localhost:3001/api/reviews')
+    console.log(response.data)
+    setReviews(response.data)
+  }
 
   const deleteProduct = async (e) => {
     e.preventDefault()
@@ -30,7 +30,6 @@ function ProductDetails(props) {
 
   const openUpdateForm = (e) => {
     console.log("opens form")
-  
   }
   const editProduct = async (e) => {
     e.preventDefault()
@@ -38,7 +37,6 @@ function ProductDetails(props) {
     const image = e.target.image.value
     const price = e.target.price.value
     const description = e.target.description.value
-
     const body = {}
 
     if (name !== "") {
@@ -53,13 +51,17 @@ function ProductDetails(props) {
     if (description !== "") {
       body.description = description
     }
-    console.log(body)
-    const response = await axios.put(`http://localhost:3001/api/product/${id}`,body)
-    console.log(response)
+    const response = await axios.put(
+      `http://localhost:3001/api/product/${id}`,
+      body
+    )
     getProduct()
-    console.log("successfully added product")
-    
   }
+
+  useEffect(() => {
+    getProduct()
+    getReviews()
+  }, [id])
 
   return (
     <div>
@@ -76,18 +78,24 @@ function ProductDetails(props) {
 
       <form onSubmit={editProduct}>
         <label>Product Title: </label>
-        <input type="text" name="name" placeholder={product.name}/>
+        <input type="text" name="name" placeholder={product.name} />
         <label>Product image: </label>
-        <input type="text" name="image" placeholder="enter image url"/>
+        <input type="text" name="image" placeholder="enter image url" />
         <label>Price: </label>
-        <input type="text" name="price" placeholder={"$" + product.price}/>
+        <input type="text" name="price" placeholder={"$" + product.price} />
         <label>Description: </label>
-        <input type="text" name="description" placeholder={product.description}/>
+        <input
+          type="text"
+          name="description"
+          placeholder={product.description}
+        />
         <button type="submit">Save</button>
       </form>
 
       <div>
-        this is where a list of reviews will be displayed with the ReviewCard
+        {reviews.map((review) => {
+          return <ReviewCard key={review._id} review={review} />
+        })}
       </div>
     </div>
   )
