@@ -28,9 +28,6 @@ function ProductDetails(props) {
     props.history.push("/")
   }
 
-  const openUpdateForm = (e) => {
-    console.log("opens form")
-  }
   const editProduct = async (e) => {
     e.preventDefault()
     const name = e.target.name.value
@@ -57,6 +54,38 @@ function ProductDetails(props) {
     )
     getProduct()
   }
+
+
+
+  const openUpdateForm = (e) => {
+    console.log("opens form")
+  }
+  
+  const addReview= async (e) => {
+    e.preventDefault()
+    const reviewer = e.target.name.value
+    console.log (reviewer)
+    const rating = e.target.rating.value
+    console.log (rating)
+    const comment = e.target.comment.value
+    const reviewBody = {}
+
+    if (reviewer !== "") {
+      reviewBody.reviewer = reviewer
+    }
+    if (rating !== "") {
+      reviewBody.rating=rating 
+    }
+    if (comment !== "") {
+      reviewBody.comment = comment
+    }
+    const response = await axios.post(
+      "http://localhost:3001/api/reviews",
+      reviewBody
+    )
+    getReviews()
+  }
+
 
   useEffect(() => {
     getProduct()
@@ -91,7 +120,19 @@ function ProductDetails(props) {
         />
         <button type="submit">Save</button>
       </form>
-
+      
+      <div>
+        <form onSubmit={addReview}>
+          <label>Reviewer Name</label>
+          <input type="text" name="name" placeholder="name"/>
+          <label>Rating</label>
+          <input type="number" name="rating" placeholder="rating"/>
+          <label>Comment</label>
+          <input type="text" name="comment" placeholder="comment"/>
+          <button>Submit</button>
+        </form>
+      </div>
+      
       <div>
         {reviews.map((review) => {
           return <ReviewCard key={review._id} review={review} />
