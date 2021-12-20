@@ -1,10 +1,9 @@
 import axios from "axios"
 import React, { useEffect, useState } from "react"
 import ReviewCard from "../components/ReviewCard"
-import EditProduct from "../components/EditProductCard"
+import EditProduct from "../components/EditProduct"
 
 function ProductDetails(props) {
-  console.log(props)
   const id = props.match.params.productId
 
   const [product, setProduct] = useState({})
@@ -17,7 +16,6 @@ function ProductDetails(props) {
 
   const getReviews = async () => {
     const response = await axios.get('http://localhost:3001/api/reviews')
-    console.log(response.data)
     setReviews(response.data)
   }
 
@@ -37,9 +35,7 @@ function ProductDetails(props) {
   const addReview= async (e) => {
     e.preventDefault()
     const reviewer = e.target.name.value
-    console.log (reviewer)
     const rating = e.target.rating.value
-    console.log (rating)
     const comment = e.target.comment.value
     const reviewBody = {}
 

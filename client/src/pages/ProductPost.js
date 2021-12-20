@@ -14,37 +14,29 @@ function ProductPost(props) {
   const handleChange = (e) => {
     if (e.target.name === "productName") {
       setProductName(e.target.value)
-      console.log(e.target.value)
     }
     if (e.target.name === "productPrice") {
       setProductPrice(e.target.value)
-      console.log(e.target.value)
     }
     if (e.target.name === "productRating") {
       setProductRating(e.target.value)
-      console.log(e.target.value)
     }
     if (e.target.name === "productDescription") {
       setProductDescription(e.target.value)
-      console.log(e.target.value)
     }
     if (e.target.name === "productCategory") {
       setProductCategory(e.target.value)
-      console.log(e.target.value)
     }
     if (e.target.name === "sellerName") {
       setSellerName(e.target.value)
-      console.log(e.target.value)
     }
     if (e.target.name === "sellerEmail") {
       setsellerEmail(e.target.value)
-      console.log(e.target.value)
     }
   }
 
   const handlePost = async (e) => {
     e.preventDefault()
-
     const response = await axios.post("http://localhost:3001/api/products", {
       name: productName,
       price: parseInt(productPrice),
@@ -54,7 +46,6 @@ function ProductPost(props) {
       seller_name: sellerName,
       seller_email: sellerEmail,
     })
-    console.log(response)
     console.log("successfully added product")
     props.history.push("/")
   }
