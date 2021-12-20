@@ -9,6 +9,8 @@ function ProductPost(props) {
   const [productCategory, setProductCategory] = useState("")
   const [sellerName, setSellerName] = useState("")
   const [sellerEmail, setsellerEmail] = useState("")
+  const [image, setimage] = useState("")
+
   const [productPost, setProductPost] = useState("")
 
   const handleChange = (e) => {
@@ -33,12 +35,16 @@ function ProductPost(props) {
     if (e.target.name === "sellerEmail") {
       setsellerEmail(e.target.value)
     }
+    if (e.target.name === "image") {
+      setimage(e.target.value)
+    }
   }
 
   const handlePost = async (e) => {
     e.preventDefault()
     const response = await axios.post("http://localhost:3001/api/products", {
       name: productName,
+      image:image,
       price: parseInt(productPrice),
       category: productCategory,
       description: productDescription,
@@ -52,47 +58,53 @@ function ProductPost(props) {
 
   return (
     <div>
-      <form>
-        <input
+      <form className="addProductForm">
+        <input 
           name="productName"
           type="text"
-          placeholder="Enter a number"
+          placeholder="Enter a product"
           onChange={handleChange}
         />
         <input
           name="productPrice"
           type="text"
-          placeholder="Enter a number"
+          placeholder="Enter a price"
           onChange={handleChange}
         />
         <input
           name="productRating"
           type="text"
-          placeholder="Enter a number"
+          placeholder="Enter a rating"
           onChange={handleChange}
         />
         <input
           name="productDescription"
           type="text"
-          placeholder="Enter a number"
+          placeholder="Enter a decription"
           onChange={handleChange}
         />
         <input
           name="category"
           type="text"
-          placeholder="Enter a number"
+          placeholder="Enter a category"
           onChange={handleChange}
         />
         <input
           name="sellerName"
           type="text"
-          placeholder="Enter a number"
+          placeholder="Enter a name"
           onChange={handleChange}
         />
         <input
           name="sellerEmail"
           type="text"
-          placeholder="Enter a number"
+          placeholder="Enter a email"
+          onChange={handleChange}
+        />
+        <input
+          name="image"
+          type="text"
+          placeholder="Enter a url"
           onChange={handleChange}
         />
         <button onClick={handlePost}>Submit</button>

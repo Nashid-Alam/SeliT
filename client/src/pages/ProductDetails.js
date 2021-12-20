@@ -5,6 +5,7 @@ import EditProduct from "../components/EditProduct"
 
 function ProductDetails(props) {
   const id = props.match.params.productId
+  const [displayEditForm, setDisplayEditForm] = useState(false)
 
   const [product, setProduct] = useState({})
   const [reviews, setReviews] = useState([])
@@ -15,7 +16,7 @@ function ProductDetails(props) {
   }
 
   const getReviews = async () => {
-    const response = await axios.get('http://localhost:3001/api/reviews')
+    const response = await axios.get("http://localhost:3001/api/reviews")
     setReviews(response.data)
   }
 
@@ -27,12 +28,11 @@ function ProductDetails(props) {
     props.history.push("/")
   }
 
-
   const openUpdateForm = (e) => {
-    console.log("opens form")
+    setDisplayEditForm(true)
   }
-  
-  const addReview= async (e) => {
+
+  const addReview = async (e) => {
     e.preventDefault()
     const reviewer = e.target.name.value
     const rating = e.target.rating.value
@@ -43,7 +43,7 @@ function ProductDetails(props) {
       reviewBody.reviewer = reviewer
     }
     if (rating !== "") {
-      reviewBody.rating=rating 
+      reviewBody.rating = rating
     }
     if (comment !== "") {
       reviewBody.comment = comment
@@ -55,7 +55,6 @@ function ProductDetails(props) {
     getReviews()
   }
 
-
   useEffect(() => {
     getProduct()
     getReviews()
@@ -63,36 +62,50 @@ function ProductDetails(props) {
 
   return (
     <div>
-      <div>
-        <img src={product.image} alt="product" />
-        <h1>{product.name}</h1>
-        <p>Rating: {product.rating}</p>
-        <p>Price: ${product.price}</p>
-        <h4>About this item</h4>
-        <p>{product.description}</p>
-        <button onClick={deleteProduct}>Delete this product</button>
-        <button onClick={openUpdateForm}>Update this product</button>
-      </div>
+      {displayEditForm ? (
+        <EditProduct product={product} getProduct={getProduct} setDisplayEditForm={setDisplayEditForm}/>
+      ) : (
+        <>
+          <div className="productDetail">
+            <img className="image" src={product.image} alt="product" />
+            <div className="productContent">
+              <h1>{product.name}</h1>
+              <div>Rating: {product.rating}</div>
+              <div className="fx-row">
+                <h4>Price: </h4>
+                <p>${product.price}</p>
+              </div>
+              <h4>About this item</h4>
+              <p>{product.description}</p>
+              <button>Buy Now</button>
+              <div className="button">
+                <button className="buttonUpdate" onClick={openUpdateForm}>
+                  Update Product
+                </button>
+                <button className="buttonDelete" onClick={deleteProduct}>
+                  Delete Product
+                </button>
+              </div>
+            </div>
+          </div>
 
-      <EditProduct product={product} getProduct={getProduct} id={id}/>
+          <form onSubmit={addReview}>
+            <label>Reviewer Name</label>
+            <input type="text" name="name" placeholder="name" />
+            <label>Rating</label>
+            <input type="number" name="rating" placeholder="rating" />
+            <label>Comment</label>
+            <input type="text" name="comment" placeholder="comment" />
+            <button>Submit</button>
+          </form>
 
-      <div>
-        <form onSubmit={addReview}>
-          <label>Reviewer Name</label>
-          <input type="text" name="name" placeholder="name"/>
-          <label>Rating</label>
-          <input type="number" name="rating" placeholder="rating"/>
-          <label>Comment</label>
-          <input type="text" name="comment" placeholder="comment"/>
-          <button>Submit</button>
-        </form>
-      </div>
-      
-      <div>
-        {reviews.map((review) => {
-          return <ReviewCard key={review._id} review={review} />
-        })}
-      </div>
+          <div className="reviewCard">
+            {reviews.map((review) => {
+              return <ReviewCard key={review._id} review={review} />
+            })}
+          </div>
+        </>
+      )}
     </div>
   )
 }

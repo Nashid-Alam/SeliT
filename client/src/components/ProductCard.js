@@ -4,10 +4,10 @@ function ProductCard(props) {
 
 
   return (
-    <div className="product" onClick={props.onClick}>
-      <img src={props.image} alt ="product"/>
-      <h3>{props.product.name}</h3>
-      <h1>{props.product.price}</h1>
+    <div className="productComponent" onClick={props.onClick}>
+      <img className="productImage" src={props.product.image} alt ="product"/>
+      <h3 className="productName">{props.product.name}</h3>
+      <h1 className="productPrice">{props.product.price}</h1>
       
     </div>
   )
