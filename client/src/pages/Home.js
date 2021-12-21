@@ -15,7 +15,7 @@ function Home(props) {
   }, [])
 
   return (
-    <div className="ProductCard">
+    <div className="productListing">
       {products.map((product) => {
         return <ProductCard onClick={()=>
           props.history.push(`/productdetails/${product._id}`)

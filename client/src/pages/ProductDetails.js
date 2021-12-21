@@ -63,28 +63,25 @@ function ProductDetails(props) {
   return (
     <div>
       {displayEditForm ? (
-        <EditProduct product={product} getProduct={getProduct} setDisplayEditForm={setDisplayEditForm}/>
+        <EditProduct
+          product={product}
+          getProduct={getProduct}
+          setDisplayEditForm={setDisplayEditForm}
+        />
       ) : (
         <>
-          <div className="productDetail">
-            <img className="image" src={product.image} alt="product" />
-            <div className="productContent">
+          <div className="productDetailContainer">
+            <img className="detailImage" src={product.image} alt="product" />
+            <div>
               <h1>{product.name}</h1>
-              <div>Rating: {product.rating}</div>
-              <div className="fx-row">
-                <h4>Price: </h4>
-                <p>${product.price}</p>
-              </div>
+              <p>Price: <span className="price">${product.price}</span></p>
+              <div>Rating: {product.average_rating}</div>
               <h4>About this item</h4>
               <p>{product.description}</p>
               <button>Buy Now</button>
-              <div className="button">
-                <button className="buttonUpdate" onClick={openUpdateForm}>
-                  Update Product
-                </button>
-                <button className="buttonDelete" onClick={deleteProduct}>
-                  Delete Product
-                </button>
+              <div>
+                <button onClick={openUpdateForm}>Update Product</button>
+                <button onClick={deleteProduct}>Delete Product</button>
               </div>
             </div>
           </div>
@@ -99,7 +96,7 @@ function ProductDetails(props) {
             <button>Submit</button>
           </form>
 
-          <div className="reviewCard">
+          <div>
             {reviews.map((review) => {
               return <ReviewCard key={review._id} review={review} />
             })}

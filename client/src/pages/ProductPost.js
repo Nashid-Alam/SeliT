@@ -38,6 +38,9 @@ function ProductPost(props) {
     if (e.target.name === "image") {
       setimage(e.target.value)
     }
+    if (e.target.name === "rating") {
+      setProductRating(e.target.value)
+    }
   }
 
   const handlePost = async (e) => {
@@ -59,54 +62,85 @@ function ProductPost(props) {
   return (
     <div>
       <form className="addProductForm">
-        <input 
+
+        <div className="productInput">
+        <label>Product Name: </label>
+        <input
           name="productName"
           type="text"
           placeholder="Enter a product"
           onChange={handleChange}
         />
+        </div>
+
+        <div className="productInput">
+        <label>Product Price: </label>
         <input
           name="productPrice"
           type="text"
           placeholder="Enter a price"
           onChange={handleChange}
         />
+        </div>
+
+        <div className="productInput">
+        <label>Product Rating: </label>
         <input
-          name="productRating"
+          name="Rating"
           type="text"
           placeholder="Enter a rating"
           onChange={handleChange}
         />
-        <input
+        </div>
+
+        <div className="productInput">
+        <label>Product Description: </label>
+        <textarea
           name="productDescription"
           type="text"
           placeholder="Enter a decription"
           onChange={handleChange}
         />
+        </div>
+
+        <div className="productInput">
+        <label>category: </label>
         <input
           name="category"
           type="text"
           placeholder="Enter a category"
           onChange={handleChange}
         />
+        </div>
+
+        <div className="productInput">
+        <label>Seller Name: </label>
         <input
           name="sellerName"
           type="text"
           placeholder="Enter a name"
           onChange={handleChange}
         />
+        </div>
+        <div className="productInput">
+        <label>Seller Email: </label>
         <input
           name="sellerEmail"
           type="text"
           placeholder="Enter a email"
           onChange={handleChange}
         />
+        </div>
+
+        <div>
+        <label>Image: </label>
         <input
           name="image"
           type="text"
           placeholder="Enter a url"
           onChange={handleChange}
         />
+        </div>
         <button onClick={handlePost}>Submit</button>
       </form>
     </div>
