@@ -45,7 +45,7 @@
 .productInput{
   width:100%;
   display: block;
-  padding:5%;
+  padding:4%;
 }
 
 .addProductForm{
@@ -55,7 +55,12 @@
   border-style: solid;
   background-color: rgb(195, 230, 242);
 }
-
+.textArea{
+  display: flex;
+  height:100%;
+  width:90%;
+  margin-top: 2%;
+}
 
 /* .button{
   display: flex;

@@ -95,7 +95,7 @@ function ProductPost(props) {
 
         <div className="productInput">
         <label>Product Description: </label>
-        <textarea
+        <textarea className="textArea"
           name="productDescription"
           type="text"
           placeholder="Enter a decription"
@@ -132,7 +132,7 @@ function ProductPost(props) {
         />
         </div>
 
-        <div>
+        <div className="productInput">
         <label>Image: </label>
         <input
           name="image"
