@@ -13,11 +13,11 @@ function ReviewCard(props) {
   }
   
   return (
-    <div>
-      <h4>{props.review.reviewer}</h4>
+    <div className="reviewCard">
+      <p className="reviewer">{props.review.reviewer}</p>
       <p>rating: {props.review.rating}</p>
       <p>{props.review.comment}</p>
-      <button onClick={deleteReview}>Delete</button>
+      <button onClick={deleteReview}>Delete Comment</button>
     </div>
   )
 }

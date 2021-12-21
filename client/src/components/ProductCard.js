@@ -1,14 +1,18 @@
-import React from 'react'
+import React from "react"
 
 function ProductCard(props) {
-
-
   return (
-    <div className="productComponent" onClick={props.onClick}>
-      <img className="productImage" src={props.product.image} alt ="product"/>
-      <h3 className="productName">{props.product.name}</h3>
-      <h1 className="productPrice">{props.product.price}</h1>
-      
+    <div className="productCard" onClick={props.onClick}>
+      <img
+        className="cardImage"
+        src={props.product.image}
+        alt="product"
+      />
+      <div>
+        <h4>{props.product.name}</h4>
+        <p className="price">${props.product.price}</p>
+        <div>Rating: {props.product.average_rating}</div>
+      </div>
     </div>
   )
 }
