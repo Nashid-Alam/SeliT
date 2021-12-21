@@ -20,7 +20,7 @@ function ProductPost(props) {
     if (e.target.name === "productPrice") {
       setProductPrice(e.target.value)
     }
-    if (e.target.name === "productRating") {
+    if (e.target.name === "Rating") {
       setProductRating(e.target.value)
     }
     if (e.target.name === "productDescription") {
@@ -51,7 +51,7 @@ function ProductPost(props) {
       price: parseInt(productPrice),
       category: productCategory,
       description: productDescription,
-      average_rating: parseInt(productRating),
+      average_rating: productRating,
       seller_name: sellerName,
       seller_email: sellerEmail,
     })

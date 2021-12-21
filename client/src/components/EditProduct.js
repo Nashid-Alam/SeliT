@@ -36,18 +36,30 @@ function EditProduct(props) {
   }
 
   return (
-    <form onSubmit={updateProduct}>
+    <form className="addProductForm" onSubmit={updateProduct}>
+      <div className="productInput">
       <label>Product Title: </label>
       <input name="name" placeholder={props.product.name} />
+      </div>
+
+      <div className="productInput">
       <label>Product image: </label>
       <input name="image" placeholder="enter image url" />
+      </div>
+
+      <div className="productInput">
       <label>Price: </label>
       <input name="price" placeholder={"$" + props.product.price} />
+      </div>
+
+      <div className="productInput">
       <label>Description: </label>
-      <textarea
+      <textarea className="textArea"
         name="description"
         placeholder={props.product.description}
       />
+      </div>
+
       <button type="submit">Save Edits</button>
       <button onClick={cancelEdit}>Cancel</button>
     </form>
