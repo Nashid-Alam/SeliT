@@ -3,7 +3,7 @@ const Schema = mongoose.Schema
 
 const Review = new Schema(
   {
-    product_id: { type: String, required: true },
+    product_id: { type: String, required: false },
     reviewer: { type: String, required: true },
     rating: { type: Number, required: true },
     comment: { type: String, required: false },

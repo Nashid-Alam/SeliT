@@ -1,0 +1,74 @@
+/* Home Page */
+
+.productListing {
+  display: flex;
+  flex-wrap: wrap;
+}
+.productCard {
+  border: 1px solid steelblue;
+  width: 250px;
+  margin: 10px;
+  padding: 5px;
+  background-color: rgb(228, 224, 224);
+}
+.cardImage {
+  width: 100%;
+}
+.price {
+  font-size: 20px;
+  color: red;
+}
+
+/* Detail Page */
+
+.productDetailContainer {
+  display: flex;
+  height: 500px;
+  margin: 20px;
+  background-color: rgb(242, 239, 239);
+}
+.detailImage {
+  max-width: 400px;
+  max-height: 400px;
+  margin-right: 20px;
+}
+
+.reviewCard {
+  margin: 5px;
+  padding: 5px;
+  background-color: rgba(227, 216, 199, 0.995);
+}
+.reviewer {
+  font-weight: bold;
+}
+
+.productInput{
+  width:100%;
+  display: block;
+  padding:4%;
+}
+
+.addProductForm{
+  align-content: center;
+  margin: 10% 20% 10% 20%;
+  padding: 5%;
+  border-style: solid;
+  background-color: rgb(195, 230, 242);
+}
+.textArea{
+  display: flex;
+  height:100%;
+  width:90%;
+  margin-top: 2%;
+}
+
+/* .button{
+  display: flex;
+  justify-content: left;
+}
+h4{
+  margin:5px 0px 0px 0px;
+}
+p{
+  margin: 0px 0px 0px 0px;
+} */
