@@ -2,6 +2,10 @@ import React from "react"
 import axios from "axios"
 
 function EditProduct(props) {
+  const cancelEdit = (e) => {
+    props.setDisplayEditForm(false)
+  }
+
   const updateProduct = async (e) => {
     e.preventDefault()
     const id = props.product._id
@@ -45,6 +49,7 @@ function EditProduct(props) {
         placeholder={props.product.description}
       />
       <button type="submit">Save Edits</button>
+      <button onClick={cancelEdit}>Cancel</button>
     </form>
   )
 }
