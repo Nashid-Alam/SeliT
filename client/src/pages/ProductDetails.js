@@ -2,11 +2,11 @@ import axios from "axios"
 import React, { useEffect, useState } from "react"
 import ReviewCard from "../components/ReviewCard"
 import EditProduct from "../components/EditProduct"
+import ReviewPost from "../components/ReviewPost"
 
 function ProductDetails(props) {
   const id = props.match.params.productId
   const [displayEditForm, setDisplayEditForm] = useState(false)
-
   const [product, setProduct] = useState({})
   const [reviews, setReviews] = useState([])
 
@@ -28,31 +28,6 @@ function ProductDetails(props) {
     setDisplayEditForm(true)
   }
 
-  const addReview = async (e) => {
-    e.preventDefault()
-    const reviewer = e.target.name.value
-    const rating = e.target.rating.value
-    const comment = e.target.comment.value
-    const reviewBody = {
-      product_id: id 
-    }
-
-    if (reviewer !== "") {
-      reviewBody.reviewer = reviewer
-    }
-    if (rating !== "") {
-      reviewBody.rating = rating
-    }
-    if (comment !== "") {
-      reviewBody.comment = comment
-    }
-    const response = await axios.post(
-      "http://localhost:3001/api/reviews",
-      reviewBody
-    )
-    getProduct()
-  }
-
   useEffect(() => {
     getProduct()
   }, [id])
@@ -71,7 +46,9 @@ function ProductDetails(props) {
             <img className="detailImage" src={product.image} alt="product" />
             <div>
               <h1>{product.name}</h1>
-              <p>Price: <span className="price">${product.price}</span></p>
+              <p>
+                Price: <span className="price">${product.price}</span>
+              </p>
               <div>Rating: {product.average_rating}</div>
               <h4>About this item</h4>
               <p>{product.description}</p>
@@ -83,19 +60,17 @@ function ProductDetails(props) {
             </div>
           </div>
 
-          <form onSubmit={addReview}>
-            <label>Reviewer Name</label>
-            <input type="text" name="name" placeholder="name" />
-            <label>Rating</label>
-            <input type="number" name="rating" placeholder="rating" />
-            <label>Comment</label>
-            <input type="text" name="comment" placeholder="comment" />
-            <button>Submit</button>
-          </form>
+          <ReviewPost productId={id} getProduct={getProduct} />
 
           <div>
             {reviews.map((review) => {
-              return <ReviewCard key={review._id} review={review} />
+              return (
+                <ReviewCard
+                  key={review._id}
+                  review={review}
+                  getProduct={getProduct}
+                />
+              )
             })}
           </div>
         </>

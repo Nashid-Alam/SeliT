@@ -9,7 +9,7 @@ function ReviewCard(props) {
     const response = await axios.delete(
       `http://localhost:3001/api/review/${props.review._id}`
     )
-    
+    props.getProduct()
   }
   
   return (
