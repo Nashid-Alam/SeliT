@@ -3,7 +3,7 @@ const Schema = mongoose.Schema
 
 const Review = new Schema(
   {
-    product_id: { type: String, required: false },
+    product_id: { type: Schema.Types.ObjectId, ref: "Product"},
     reviewer: { type: String, required: true },
     rating: { type: Number, required: true },
     comment: { type: String, required: false },
@@ -11,4 +11,4 @@ const Review = new Schema(
   { timestamps: true }
 )
 
-module.exports = mongoose.model("reviews", Review)
+module.exports = mongoose.model("Review", Review)

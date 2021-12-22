@@ -23,7 +23,7 @@ const getAllProducts = async (req, res) => {
 const getProductById = async (req, res) => {
   try {
     const id = req.params.id
-    const products = await Product.findById(id)
+    const products = await Product.findById(id).populate('reviews')
     return res.status(200).json(products)
   } catch (error) {
     return res.status(500).send(error.message)
@@ -52,8 +52,16 @@ const updateProductById = async (req, res) => {
 
 const createReview = async (req, res) => {
   try {
+    const productId = req.body.product_id
     const review = await new Review(req.body)
     await review.save()
+    
+    const product = await Product.findById(productId)
+    const originalAvgRating = product.average_rating
+    product.average_rating = (originalAvgRating * product.reviews.length + review.rating) / (product.reviews.length+1)
+    product.reviews.push(review._id)
+    await Product.findByIdAndUpdate(productId, product)
+
     return res.status(201).json(review)
   } catch (error) {
     return res.status(500).json({ error: error.message })
@@ -81,8 +89,20 @@ const getReviewById = async (req, res) => {
 
 const deleteReviewById = async (req, res) => {
   try {
-    const id = req.params.id
-    const deletedReview = await Review.findByIdAndDelete(id)
+    const reviewId = req.params.id
+    const deletedReview = await Review.findByIdAndDelete(reviewId)
+    const productId = deletedReview.product_id
+
+    const product = await Product.findById(productId)
+    const reviews = product.reviews
+    const index = reviews.indexOf(reviewId)
+    product.reviews.splice(index, 1)
+
+    // const originalAvgRating = product.average_rating
+    // product.average_rating = (originalAvgRating * product.reviews.length + review.rating) / (product.reviews.length+1)
+    // product.reviews.push(review._id)
+    await Product.findByIdAndUpdate(productId, product)
+
     return res.status(200).json("Review Deleted")
   } catch (error) {
     return res.status(500).send(error.message)

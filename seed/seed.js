@@ -13,6 +13,7 @@ const main = async () => {
   }
 
   await Product.insertMany(products)
+
   console.log("Created some product")
 }
 const run = async () => {
