@@ -13,11 +13,7 @@ function ProductDetails(props) {
   const getProduct = async () => {
     const response = await axios.get(`http://localhost:3001/api/product/${id}`)
     setProduct(response.data)
-  }
-
-  const getReviews = async () => {
-    const response = await axios.get("http://localhost:3001/api/reviews")
-    setReviews(response.data)
+    setReviews(response.data.reviews)
   }
 
   const deleteProduct = async (e) => {
@@ -37,7 +33,9 @@ function ProductDetails(props) {
     const reviewer = e.target.name.value
     const rating = e.target.rating.value
     const comment = e.target.comment.value
-    const reviewBody = {}
+    const reviewBody = {
+      product_id: id 
+    }
 
     if (reviewer !== "") {
       reviewBody.reviewer = reviewer
@@ -52,12 +50,11 @@ function ProductDetails(props) {
       "http://localhost:3001/api/reviews",
       reviewBody
     )
-    getReviews()
+    getProduct()
   }
 
   useEffect(() => {
     getProduct()
-    getReviews()
   }, [id])
 
   return (

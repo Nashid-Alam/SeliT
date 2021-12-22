@@ -3,7 +3,7 @@ import axios from "axios"
 
 
 function ReviewCard(props) {
-  console.log(props.review)
+
   const deleteReview = async (e) => {
     e.preventDefault()
     const response = await axios.delete(
@@ -17,7 +17,7 @@ function ReviewCard(props) {
       <p className="reviewer">{props.review.reviewer}</p>
       <p>rating: {props.review.rating}</p>
       <p>{props.review.comment}</p>
-      <button onClick={deleteReview}>Delete Comment</button>
+      <button onClick={deleteReview}>Delete Review</button>
     </div>
   )
 }
