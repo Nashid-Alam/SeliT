@@ -7,6 +7,7 @@ import ReviewPost from "../components/ReviewPost"
 function ProductDetails(props) {
   const id = props.match.params.productId
   const [displayEditForm, setDisplayEditForm] = useState(false)
+  const [displaySellerContact, setdisplaySellerContact] = useState(false)
   const [product, setProduct] = useState({})
   const [reviews, setReviews] = useState([])
 
@@ -26,6 +27,10 @@ function ProductDetails(props) {
 
   const openUpdateForm = (e) => {
     setDisplayEditForm(true)
+  }
+  const openSellerContact = (e) => {
+    setdisplaySellerContact(!displaySellerContact)
+    
   }
 
   useEffect(() => {
@@ -52,7 +57,8 @@ function ProductDetails(props) {
               <div>Rating: {product.average_rating}</div>
               <h4>About this item</h4>
               <p>{product.description}</p>
-              <button>Buy Now</button>
+              <button onClick={openSellerContact}>Buy Now</button>
+              {displaySellerContact?(<p>contact : {product.seller_email}</p>):<p></p>}
               <div>
                 <button onClick={openUpdateForm}>Update Product</button>
                 <button onClick={deleteProduct}>Delete Product</button>
