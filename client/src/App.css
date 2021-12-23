@@ -75,6 +75,11 @@
   font-style: italic;
   font-size: 40px;
 }
+.aboutMe{
+  margin:50px 20px 20px 50px;
+  color:red;
+
+}
 /* .button{
   display: flex;
   justify-content: left;
